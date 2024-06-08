@@ -2,64 +2,66 @@
 #include <ctime>
 using namespace std;
 
-int* createArr(int* arr1, int* size) {
-    for (int i = 0; i < *size; ++i) {
-        arr1[i] = rand() % 100;
-    }
-    return arr1;
+int sum(int* a, int* b) {
+    return *a + *b;
 }
 
-void printArr(int* arr1, int* size) {
-    for (int i = 0; i < *size; i++) {
-        cout << *(arr1 + i) << " ";
-    }
-    cout << endl;
+int subtract(int* a, int* b) {
+    return *a - *b;
 }
 
-int* exchangeArrs(int* arr1, int* arr2, int* size) {
-    for (int i = 0; i < *size; i++) {
-        *(arr2 + i) = *(arr1 + i);
-    }
-    int* beg = arr2;
-    int* end = arr2 + *size - 1;
-
-    while (beg < end) {
-
-        int temp = *beg;
-        *beg = *end;
-        *end = temp;
-
-        beg++;
-        end--;
-    }
-
-    return arr2;
+int multiply(int* a, int* b) {
+    return *a * *b;
 }
 
+double* divide(int* a, int* b) {
+    return (*a != 0 && *b != 0) ? new double(static_cast<double>(*a) / *b) : nullptr;
+}
 
 int main() {
-    srand(time(0));
-    int* size = new int{ 5 };
+    int* a = new int;
+    int* b = new int;
+    int* choice = new int;
 
-    int* arr1 = new int[*size];
-    createArr(arr1, size);
-    printArr(arr1, size);
+    double* result = nullptr;
 
-    int* arr2 = new int[*size];
-    createArr(arr2, size);
-    printArr(arr2, size);
+    while (true) {
+        cout << "Enter first value:" << endl;
+        cin >> *a;
+        cout << "Enter second value:" << endl;
+        cin >> *b;
 
-    exchangeArrs(arr1, arr2, size);
+        cout << "Choose operation:" << endl;
+        cout << "1 - (+)\n2 - (-)\n3 - (*)\n4 - (/)\n5 - Exit" << endl;
+        cin >> *choice;
 
-    cout << "Array 1 after exchange: ";
-    printArr(arr1, size);
-    cout << "Array 2 after exchange: ";
-    printArr(arr2, size);
+        switch (*choice) {
+        case 1:
+            cout << sum(a, b) << endl;
+            break;
+        case 2:
+            cout << subtract(a, b) << endl;
+            break;
+        case 3:
+            cout << multiply(a, b) << endl;
+            break;
+        case 4:
+            result = divide(a, b);
+            if (result != nullptr) {
+                cout << *result << endl;
+            }
+            else {
+                cout << "Division by zero error!" << endl;
+            }
+            break;
+        case 5:
+            return 0;
+        }
+    }
 
-    delete[] arr1;
-    delete[] arr2;
-    delete size;
+    delete a;
+    delete b;
+    delete choice;
+    delete result;
     return 0;
 }
-
-
