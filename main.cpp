@@ -20,8 +20,22 @@ int* exchangeArrs(int* arr1, int* arr2, int* size) {
     for (int i = 0; i < *size; i++) {
         *(arr2 + i) = *(arr1 + i);
     }
+    int* beg = arr2;
+    int* end = arr2 + *size - 1;
+
+    while (beg < end) {
+
+        int temp = *beg;
+        *beg = *end;
+        *end = temp;
+
+        beg++;
+        end--;
+    }
+
     return arr2;
 }
+
 
 int main() {
     srand(time(0));
