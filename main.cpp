@@ -19,5 +19,8 @@ int main() {
 	else {
 		cout << "Numbers are equal" << endl;
 	}
+
+	delete num1;
+	delete num2;
 	return 0;
 }
