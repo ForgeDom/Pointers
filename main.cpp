@@ -47,12 +47,7 @@ int main() {
                 cout << multiply(a, b) << endl;
                 break;
             case 4:
-                if (*b != 0) {
-                    cout << divide(a, b) << endl;
-                }
-                else {
-                    cout << "Cant divide by zero" << endl;
-                }
+                (divide != nullptr) ? cout<< *divide << endl : cout << "The value is null!" << endl;
                 break;
             case 5:
                 return 0;
