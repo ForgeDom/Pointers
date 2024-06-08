@@ -16,5 +16,7 @@ int main() {
 	else {
 		cout << "Number equals zero" << endl;
 	}
+	
+	delete num;
 	return 0;
 }
