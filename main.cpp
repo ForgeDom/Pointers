@@ -3,66 +3,42 @@
 using namespace std;
 
 
-int sum(int* a, int* b) {
-    return *a + *b;
+int* createArray(int* size) {
+    int* arr = new int[*size];
+    for (int i = 0; i < *size; i++) {
+        arr[i] = rand() % 255;
+    }
+    return arr;
 }
 
-int subtract(int* a, int* b) {
-    return *a - *b;
+
+void printArray(int* arr, int* size) {
+    for (int i = 0; i < *size; i++) {
+        cout << *(arr + i) << " ";
+    }
+    cout << endl;
 }
 
-int multiply(int* a, int* b) {
-    return *a * *b;
-}
-
-double divide(int* a, int* b) {
-    return static_cast<double>(*a) / *b;
+int* sumArr(int* arr ,int* size) {
+    int* sum = new int{ 0 };
+    for (int i = 0; i < *size; ++i) {
+        *sum += arr[i];
+    }
+    return sum;
 }
 
 int main() {
-    int* a = new int;
-    int* b = new int;
-    int* choice = new int;
+    srand(time(0));
 
-    while (true) {
-        cout << "Enter first value:" << endl;
-        cin >> *a;
-        cout << "Enter second value:" << endl;
-        cin >> *b;
+    int* size = new int{ 5 };
+    int* arr = createArray(size);
+    printArray(arr, size);
+    int* result = sumArr(arr, size);
+    cout << *result << endl;
 
-        cout << "Choose operation:" << endl;
-        cout << "1 - (+)\n2 - (-)\n3 - (*)\n4 - (/)\n5 - Exit" << endl;
-        cin >> *choice;
-
-
-
-        switch (*choice) {
-            case 1:
-                cout << sum(a, b) << endl;
-                break;
-            case 2:
-                cout << subtract(a, b) << endl;
-                break;
-            case 3:
-                cout << multiply(a, b) << endl;
-                break;
-            case 4:
-                if (*b != 0) {
-                    cout << divide(a, b) << endl;
-                }
-                else {
-                    cout << "Cant divide by zero" << endl;
-                }
-                break;
-            case 5:
-                return 0;
-        }
-    }
-
-    delete a;
-    delete b;
-    delete choice;
-
+    delete[] arr;
+    delete size;
+    delete result;
     return 0;
 }
 
